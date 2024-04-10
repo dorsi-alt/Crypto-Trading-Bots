@@ -10,6 +10,11 @@ class ThermoBrainDataAnalysis:
         TakeProfit = FilledPrice * self.settings['Take Profit']
 
         return  TakeProfit, StopLoss
+    
+    def PercentageIncreaseCalc(self, CurrentPrice, FilledPrice):
+        PercentIncrease = ((CurrentPrice - FilledPrice)/FilledPrice) * 100
+        return PercentIncrease
+    
     def CalulateRSI(self, historicalPrice):
         dataFrame = historicalPrice
 

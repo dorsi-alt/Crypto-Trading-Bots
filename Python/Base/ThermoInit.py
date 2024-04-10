@@ -1,5 +1,6 @@
 import time
 from Settings import ThermoSettings
+import Display
 class ThermoBot:
     def __init__(self, Birdeye, ThermoBrain):
         self.Birdeye = Birdeye
@@ -37,10 +38,12 @@ class ThermoBot:
         TP, SL = self.ThermoBrain.getTPSL(filledPrice)
         while self.openPostionFlag:
             LivePrice =  self.Birdeye.getTokenLivePrice()
-            displayMessage = f"Live Price: {LivePrice}\tFilled Price: {filledPrice}\tTake Profit: {TP}\tStop Loss: {SL}"
-            print(displayMessage)
+            PL = self.ThermoBrain.PercentageIncreaseCalc(LivePrice, filledPrice)
+            displayMessage = f"Live Price: {LivePrice} Filled Price: {filledPrice} Take Profit: {TP} Stop Loss: {SL} PL: {PL}"
+            print('\x1b[48;5;52m\x1b[K%s\x1b[0m', displayMessage)
             SellSignal = self.ThermoBrain.CheckOpenPosition(LivePrice, TP, SL)
 
+            time.sleep(ThermoSettings['Sleep Time'])
 
 
 

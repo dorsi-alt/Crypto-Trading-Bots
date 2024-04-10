@@ -12,4 +12,5 @@ Birdeye = BirdeyeDataServices(ThermoSettings['apiKey'], token)
 ThermoBrain = ThermoBrainDataAnalysis(ThermoSettings)
 Thermo = ThermoBot(Birdeye, ThermoBrain)
 FilledPrice = Thermo.SeekEntry()
+Thermo.MonitoringTrade(FilledPrice)
 
